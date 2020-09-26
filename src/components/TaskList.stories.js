@@ -48,3 +48,11 @@ Empty.args = {
   ...Loading.args,
   loading: false,
 };
+
+export const Empty2 = Template.bind({});
+Empty.args = {
+  // Shaping the stories through args composition.
+  // Inherited data coming from the Loading story.
+  ...Loading.args,
+  loading: false,
+};

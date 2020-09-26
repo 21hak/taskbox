@@ -34,10 +34,3 @@ Archived.args = {
   },
 };
 
-export const Archived2 = Template.bind({});
-Archived.args = {
-  task: {
-    ...Default.args.task,
-    state: "TASK_ARCHIVED",
-  },
-};
