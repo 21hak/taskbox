@@ -1,11 +1,11 @@
 // src/components/TaskList.js
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import React from "react";
+import { connect } from "react-redux";
+import { archiveTask, pinTask } from "../lib/redux";
+import Task from "./Task";
 
-import Task from './Task';
-import { connect } from 'react-redux';
-import { archiveTask, pinTask } from '../lib/redux';
 /* previous implementation of TaskList */
 
 export function PureTaskList({ loading, tasks, onPinTask, onArchiveTask }) {
@@ -73,11 +73,12 @@ PureTaskList.defaultProps = {
 };
 
 export default connect(
-  ({ tasks }) => ({
-    tasks: tasks.filter(
-      (t) => t.state === "TASK_INBOX" || t.state === "TASK_PINNED"
-    ),
-  }),
+  // ({ tasks }) => ({
+  //   tasks: tasks.filter(
+  //     (t) => t.state === "TASK_INBOX" || t.state === "TASK_PINNED"
+  //   ),
+  // }),
+  ({ tasks }) => ({ tasks: tasks }),
   (dispatch) => ({
     onArchiveTask: (id) => dispatch(archiveTask(id)),
     onPinTask: (id) => dispatch(pinTask(id)),
