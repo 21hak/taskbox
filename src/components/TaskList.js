@@ -2,22 +2,29 @@ import { useObserver } from "mobx-react";
 // src/components/TaskList.js
 import PropTypes from "prop-types";
 import React from "react";
-import useStore from "../useStore";
 import Task from "./Task";
 
 /* previous implementation of TaskList */
 
-export default function PureTaskList({ loading }) {
-  const { taskList } = useStore();
+export default function PureTaskList({
+  loading,
+  tasks,
+  onPinTask,
+  onArchiveTask,
+}) {
+  // const { taskList } = useStore();
 
-  const tasks = taskList.tasks;
+  // const tasks = taskListStore.tasks;
+  // const tasks = tasks;
   const events = {
-    onPinTask: (id) => {
-      taskList.pinTask(id);
-    },
-    onArchiveTask: (id) => {
-      taskList.archiveTask(id);
-    },
+    // onPinTask: (id) => {
+    //   taskListStore.pinTask(id);
+    // },
+    // onArchiveTask: (id) => {
+    //   taskListStore.archiveTask(id);
+    // },
+    onPinTask: onPinTask,
+    onArchiveTask: onArchiveTask,
   };
   const LoadingRow = (
     <div className="loading-item">
