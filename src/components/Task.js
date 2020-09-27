@@ -1,3 +1,4 @@
+import { useObserver } from "mobx-react";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -22,7 +23,7 @@ export default function Task({
   onArchiveTask,
   onPinTask,
 }) {
-  return (
+  return useObserver(() => (
     <div className={`list-item ${state}`}>
       <label className="checkbox">
         <input
@@ -54,5 +55,5 @@ export default function Task({
         )}
       </div>
     </div>
-  );
+  ));
 }

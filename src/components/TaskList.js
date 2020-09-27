@@ -56,7 +56,6 @@ export default function PureTaskList({ loading }) {
       ...tasks.filter((t) => t.state === "TASK_PINNED"),
       ...tasks.filter((t) => t.state !== "TASK_PINNED"),
     ];
-    console.log(tasks);
     return (
       <div className="list-items">
         {tasksInOrder.map((task) => (
