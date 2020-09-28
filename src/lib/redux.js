@@ -1,7 +1,3 @@
-// src/lib/redux.js
-
-// A simple redux store/actions/reducer implementation.
-// A true app would be more complex and separated into different files.
 import { createStore } from "redux";
 
 // The actions are the "names" of the changes that can happen to the store
@@ -49,3 +45,15 @@ const defaultTasks = [
 
 // We export the constructed redux store
 export default createStore(reducer, { tasks: defaultTasks });
+
+// src/store.js
+
+// const reducer = combineReducers({
+//   common: commonReducer,
+//   search: searchReducer,
+//   task: taskReducer,
+// });
+
+// const store = createStore(reducer);
+
+// export default store;
