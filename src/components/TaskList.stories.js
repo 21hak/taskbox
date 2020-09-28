@@ -58,3 +58,14 @@ Empty2.args = {
   ...Loading.args,
   loading: false,
 };
+
+export const WithPinnedTasks2 = Template.bind({});
+WithPinnedTasks2.args = {
+  // Shaping the stories through args composition.
+  // Inherited data coming from the Default story.
+  tasks: [
+    ...Default.args.tasks.slice(0, 5),
+    { id: '6', title: 'Task 6 (pinned)', state: 'TASK_PINNED' },
+    { id: '7', title: 'Task 7 (pinned)', state: 'TASK_PINNED' },
+  ],
+};
