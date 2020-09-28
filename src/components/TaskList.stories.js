@@ -1,12 +1,14 @@
 import React from 'react';
 
-import { PureTaskList } from './TaskList';
+import PureTaskList from './TaskList';
 import * as TaskStories from './Task.stories';
 
+// A super-simple mock of a redux store
 export default {
   component: PureTaskList,
   title: 'TaskList',
   decorators: [story => <div style={{ padding: '3rem' }}>{story()}</div>],
+
 };
 
 const Template = args => <PureTaskList {...args} />;

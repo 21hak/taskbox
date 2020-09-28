@@ -12,20 +12,6 @@ export default function PureTaskList({
   onPinTask,
   onArchiveTask,
 }) {
-  // const { taskList } = useStore();
-
-  // const tasks = taskListStore.tasks;
-  // const tasks = tasks;
-  const events = {
-    // onPinTask: (id) => {
-    //   taskListStore.pinTask(id);
-    // },
-    // onArchiveTask: (id) => {
-    //   taskListStore.archiveTask(id);
-    // },
-    onPinTask: onPinTask,
-    onArchiveTask: onArchiveTask,
-  };
   const LoadingRow = (
     <div className="loading-item">
       <span className="glow-checkbox" />
@@ -34,7 +20,6 @@ export default function PureTaskList({
       </span>
     </div>
   );
-
   return useObserver(() => {
     if (loading) {
       return (
@@ -66,7 +51,12 @@ export default function PureTaskList({
     return (
       <div className="list-items">
         {tasksInOrder.map((task) => (
-          <Task key={task.id} task={task} {...events} />
+          <Task
+            key={task.id}
+            task={task}
+            onArchiveTask={onArchiveTask}
+            onPinTask={onPinTask}
+          />
         ))}
       </div>
     );
@@ -80,16 +70,3 @@ PureTaskList.propTypes = {
 PureTaskList.defaultProps = {
   loading: false,
 };
-
-// export default connect(
-//   // ({ tasks }) => ({
-//   //   tasks: tasks.filter(
-//   //     (t) => t.state === "TASK_INBOX" || t.state === "TASK_PINNED"
-//   //   ),
-//   // }),
-//   ({ tasks }) => ({ tasks: tasks }),
-//   (dispatch) => ({
-//     onArchiveTask: (id) => dispatch(archiveTask(id)),
-//     onPinTask: (id) => dispatch(pinTask(id)),
-//   })
-// )(PureTaskList);

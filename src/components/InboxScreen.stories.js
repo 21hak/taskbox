@@ -1,8 +1,8 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import { action } from '@storybook/addon-actions';
-import { PureInboxScreen } from './InboxScreen';
-import * as TaskListStories from './TaskList.stories';
+import { action } from "@storybook/addon-actions";
+import React from "react";
+import { TaskListProvider } from "../context/taskListContext";
+import { PureInboxScreen } from "./InboxScreen";
+import * as TaskListStories from "./TaskList.stories";
 
 // A super-simple mock of a redux store
 const store = {
@@ -12,20 +12,20 @@ const store = {
     };
   },
   subscribe: () => 0,
-  dispatch: action('dispatch'),
+  dispatch: action("dispatch"),
 };
 
 export default {
   component: PureInboxScreen,
-  decorators: [story => <Provider store={store}>{story()}</Provider>],
-  title: 'InboxScreen',
+  decorators: [(story) => <TaskListProvider>}>{story()}</TaskListProvider>],
+  title: "InboxScreen",
 };
 
-const Template = args => <PureInboxScreen {...args} />;
+const Template = (args) => <PureInboxScreen {...args} />;
 
 export const Default = Template.bind({});
 
 export const Error = Template.bind({});
 Error.args = {
-  error: 'Something',
+  error: "Something",
 };

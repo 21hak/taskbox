@@ -1,4 +1,4 @@
-import { taskList } from './stores/taskList';
+import { taskList } from './stores/taskListStore';
 
 const useStore = () => {
   return { taskList };

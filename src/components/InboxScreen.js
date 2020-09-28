@@ -1,16 +1,15 @@
+import { useObserver } from "mobx-react";
 // src/components/InboxScreen.js
-
 import PropTypes from "prop-types";
 import React from "react";
-import { connect } from "react-redux";
 import styled from "styled-components";
+import { useTaskListStore } from "../context/taskListContext";
 import TaskList from "./TaskList";
 
 const Page = styled.div`
   min-height: 100vh;
   background: white;
 `;
-
 
 const Nav = styled.nav`
   background: #d3edf4;
@@ -38,44 +37,38 @@ const TitleWrapper = styled.span`
   max-width: 100%;
 `;
 export function PureInboxScreen({ error }) {
-  if (error) {
-    return (
-      // <div className="page lists-show">
-      //   <div className="wrapper-message">
-      //     <span className="icon-face-sad" />
-      //     <div className="title-message">Oh no!</div>
-      //     <div className="subtitle-message">Something went wrong</div>
-      //   </div>
-      // </div>
-
-      <Page>
-        <div className="wrapper-message">
-          <span className="icon-face-sad" />
-          <div className="title-message">Oh no!</div>
-          <div className="subtitle-message">Something went wrong</div>
+  const taskListStore = useTaskListStore();
+  return useObserver(() => {
+    if (error) {
+      return (
+        <Page>
+          <div className="wrapper-message">
+            <span className="icon-face-sad" />
+            <div className="title-message">Oh no!</div>
+            <div className="subtitle-message">Something went wrong</div>
           </div>
+        </Page>
+      );
+    }
+    return (
+      <Page>
+        <Nav>
+          <TitlePage>
+            <TitleWrapper>Taskbox</TitleWrapper>
+          </TitlePage>
+        </Nav>
+        <TaskList
+          tasks={taskListStore.tasks}
+          onArchiveTask={(id) => {
+            taskListStore.archiveTask(id);
+          }}
+          onPinTask={(id) => {
+            taskListStore.pinTask(id);
+          }}
+        />
       </Page>
     );
-  }
-
-  return (
-    // <div className="page lists-show">
-    //   <nav>
-    //     <h1 className="title-page">
-    //       <span className="title-wrapper">Taskbox</span>
-    //     </h1>
-    //   </nav>
-    //   <TaskList />
-    // </div>
-    <Page>
-      <Nav>
-        <TitlePage>
-          <TitleWrapper>Taskbox</TitleWrapper>
-        </TitlePage>
-      </Nav>
-      <TaskList />
-    </Page>
-  );
+  });
 }
 
 PureInboxScreen.propTypes = {
@@ -87,4 +80,4 @@ PureInboxScreen.defaultProps = {
   error: null,
 };
 
-export default connect(({ error }) => ({ error }))(PureInboxScreen);
+// export default connect(({ error }) => ({ error }))(PureInboxScreen);
